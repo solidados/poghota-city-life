@@ -4,7 +4,7 @@ Poghota App
 <p align="center"><i>city-life</i></p>
 <p align="center">
 <br>
-
+![discord_logo](https://github.com/solidados/poghota-city-life/assets/81189948/40af30b4-84c9-4d5a-b812-f85dbef9727e)
 <br>
 </p>
 <h3 align="center">
