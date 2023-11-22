@@ -1,19 +1,15 @@
 <h1 align="center">
 Poghota App
 </h1>
-<p align="center"><i>city-life</i></p>
 <p align="center">
-<br>
-![discord_logo](https://github.com/solidados/poghota-city-life/assets/81189948/40af30b4-84c9-4d5a-b812-f85dbef9727e)
-<br>
+<img src="https://github.com/solidados/poghota-city-life/assets/81189948/40af30b4-84c9-4d5a-b812-f85dbef9727e" alt="logo" width="180" />
 </p>
+<p align="center"><i>city-life</i></p>
 <h3 align="center">
 Tumo labs project for city life
 </h3>
 
 ## Overview
-
----
 
 ## Technology Stack
 
