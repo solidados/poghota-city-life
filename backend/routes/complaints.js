@@ -1,40 +1,28 @@
 const express = require('express')
 const Complaint = require('../models/complaintModel')
+const {
+  createComplaint,
+  getAllComplaints,
+  getComplaint,
+  deleteComplaint,
+  updateComplaint
+} = require("../controllers/complaintController");
 
 const router = express.Router()
 
 // GET all complaints:
-router.get('/', (req, res) => {
-  res.json({message: 'GET all complaints'})
-})
+router.get('/', getAllComplaints)
 
 // GET single complaint
-router.get('/:id', (req, res) => {
-  res.json({message: 'GET single complaint'})
-})
+router.get('/:id', getComplaint)
 
 // POST a new complaint
-router.post('/', async (req, res) => {
-  const {title, department, location, description, images} = req.body
-
-  try {
-    const complaint = await Complaint.create({title, department, location, description, images})
-    res.status(200).json(complaint)
-  }
-  catch (error) {
-    res.status(400).json({error: error.message})
-  }
-  res.json({message: 'POST a complaint'})
-})
+router.post('/', createComplaint)
 
 // DELETE a complaint
-router.delete('/:id', (req, res) => {
-  res.json({message: 'DELETE a complaint'})
-})
+router.delete('/:id', deleteComplaint)
 
 // UPDATE a complaint
-router.patch('/:id', (req, res) => {
-  res.json({message: 'UPDATE a complaint'})
-})
+router.patch('/:id', updateComplaint)
 
 module.exports = router
