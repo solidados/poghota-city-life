@@ -30,7 +30,7 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1400px;
+  max-width: 1200px;
   padding: 10px 20px;
   margin: 0 auto;
 }
@@ -41,7 +41,7 @@ header a {
 }
 
 .pages {
-  max-width: 1400px;
+  max-width: 1200px;
   padding: 20px;
   margin: 0 auto;
 }
@@ -55,4 +55,59 @@ header a {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+}
+
+.complaint-details {
+  position: relative;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 4px 2px 8px rgba(84, 84, 84, 0.4);
+}
+
+.complaint-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.complaint-details p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.complaint-details p:last-child {
+  color: #a1a1a1;
+}
+
+.complaint-details span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #333333;
+  cursor: pointer;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.material-symbols-outlined:hover {
+  color: var(--error);
+}
+
+.material-symbols-outlined:active, .workout-details span:active {
+  transform: scale3d(95%, 95%, 95%);
 }
