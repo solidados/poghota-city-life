@@ -113,6 +113,10 @@ header a {
 }
 
 /* New Complaint Form */
+form h3 {
+  padding: 20px 0;
+}
+
 label, input, select, textarea {
   display: block;
 }

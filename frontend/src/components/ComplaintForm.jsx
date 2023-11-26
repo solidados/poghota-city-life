@@ -1,6 +1,9 @@
 import {useState} from "react";
+import {useComplaintsContext} from "../hooks/useComplaintsContext";
 
 const ComplaintForm = () => {
+  const {dispatch} = useComplaintsContext()
+
   const [title, setTitle] = useState('')
   const [department, setDepartment] = useState('')
   const [location, setLocation] = useState('')
@@ -31,14 +34,15 @@ const ComplaintForm = () => {
       setDescription('')
       setError(null)
       console.log('New complaint was added')
+      dispatch({type: 'CREATE_COMPLAINT', payload: json})
     }
   }
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-      <h3>Add New Complaint</h3>
+      <h3>New Complaint</h3>
 
-      <label>Complaint:
+      <label>Complaint title:
         <input
           type="text"
           onChange={(e) => {setTitle(e.target.value)}}

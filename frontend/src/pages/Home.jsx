@@ -1,17 +1,19 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useComplaintsContext} from "../hooks/useComplaintsContext";
+
+// components
 import ComplaintDetails from "../components/ComplaintDetails";
 import ComplaintForm from "../components/ComplaintForm";
 
 const Home = () => {
-  const [complaints, setComplaints] = useState(null)
-
+  const {complaints, dispatch} = useComplaintsContext()
   useEffect(() => {
     const fetchComplaints = async () => {
       const response = await fetch('/api/complaints');
       const json = await response.json();
 
       if (response.ok) {
-        setComplaints(json)
+        dispatch({type: 'SET_COMPLAINTS', payload: json})
       }
     }
 
