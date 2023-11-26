@@ -1,19 +1,21 @@
-const express = require('express')
 require('dotenv').config()
+
+const express = require('express')
+const complaintRoutes = require('./routes/complaints')
 
 // * express app
 const app = express()
 
 // * middleware
+app.use(express.json())
+
 app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
 })
 
 // * routes
-app.get('/', (req, res) => {
-  res.json({message: 'Welcome to Poghota Application'})
-})
+app.use('/api/complaints/', complaintRoutes)
 
 // * listening requests
 app.listen(process.env.PORT, () => {
