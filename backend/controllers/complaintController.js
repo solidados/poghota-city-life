@@ -26,7 +26,7 @@ const getComplaint = async (req, res) => {
   res.status(200).json(complaint)
 }
 
-// * POST a complaint
+// * POST a new complaint
 const createComplaint = async (req, res) => {
   const {title, department, location, description, images} = req.body
 
