@@ -1,5 +1,8 @@
 import {useComplaintsContext} from "../hooks/useComplaintsContext";
 
+// date fns:
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const ComplaintDetails = ({complaint}) => {
   const {dispatch} = useComplaintsContext()
 
@@ -20,8 +23,8 @@ const ComplaintDetails = ({complaint}) => {
       <p><strong>Department: </strong>{complaint.department}</p>
       <p><strong>Description: </strong>{complaint.description}</p>
       <p><strong>Location: </strong>{complaint.location}</p>
-      <p>{complaint.createdAt}</p>
-      <span onClick={handleClick}>delete</span>
+      <p className="complaint-created">{formatDistanceToNow(new Date(complaint.createdAt), {addSuffix: true})}</p>
+      <span onClick={handleClick} className="material-symbols-outlined">delete</span>
     </div>
   );
 };
