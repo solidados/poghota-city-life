@@ -119,6 +119,12 @@ header a {
 }
 
 /* New Complaint Form */
+.create {
+  position: fixed;
+  right: 25px;
+  width: 30%;
+}
+
 form h3 {
   padding: 20px 0;
 }
