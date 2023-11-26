@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ComplaintDetails from "../components/ComplaintDetails";
+import ComplaintForm from "../components/ComplaintForm";
 
 const Home = () => {
   const [complaints, setComplaints] = useState(null)
@@ -23,6 +24,7 @@ const Home = () => {
           <ComplaintDetails key={complaint._id} complaint={complaint} />
         ))}
       </div>
+      <ComplaintForm />
     </div>
   );
 };
