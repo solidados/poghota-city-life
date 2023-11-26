@@ -1,13 +1,58 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Lato:wght@100;300;400;700&family=Poppins:wght@300;400;500;600;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* layout */
+:root {
+  --primary: rgb(106, 180, 201);
+  --secondary: rgb(62, 104, 161);
+  --text: rgb(25, 39, 86);
+  --error: #e7185a;
+}
+
+body {
+  margin: 0;
+  background: #f1f1f1;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  color: var(--text);
+}
+
+header {
+  background: #ffffff;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  padding: 10px 20px;
+  margin: 0 auto;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  width: 80px;
+}
+
+/* Home page*/
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
 }
