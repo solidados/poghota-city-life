@@ -1,4 +1,5 @@
 const express = require('express')
+const Complaint = require('../models/complaintModel')
 
 const router = express.Router()
 
@@ -13,7 +14,16 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new complaint
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const {title, department, location, description, images} = req.body
+
+  try {
+    const complaint = await Complaint.create({title, department, location, description, images})
+    res.status(200).json(complaint)
+  }
+  catch (error) {
+    res.status(400).json({error: error.message})
+  }
   res.json({message: 'POST a complaint'})
 })
 
