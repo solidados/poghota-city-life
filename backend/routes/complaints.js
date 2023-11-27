@@ -1,5 +1,4 @@
 const express = require('express')
-const Complaint = require('../models/complaintModel')
 const {
   createComplaint,
   getAllComplaints,
@@ -7,8 +6,12 @@ const {
   deleteComplaint,
   updateComplaint
 } = require("../controllers/complaintController");
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+// REQUIRE Auth for all Complaint routes
+router.use(requireAuth)
 
 // GET all complaints:
 router.get('/', getAllComplaints)
