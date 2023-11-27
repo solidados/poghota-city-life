@@ -16,7 +16,7 @@ const userSchema = new Schema({
   }
 })
 
-// * static register method (to be used in userController):
+// * REGISTER USER: static register method (to be used in userController):
 userSchema.statics.register = async function (email, password) {
 
   // validation of email and password:
@@ -35,6 +35,23 @@ userSchema.statics.register = async function (email, password) {
   const user = await this.create({ email, password: hash })
 
   return user;
+}
+
+// * LOGIN USER: static login method (to be used in userController):
+userSchema.statics.login = async function (email, password) {
+
+  // check of email and password fields to be filled:
+  if (!email || !password) { throw Error('All fields must be filled') }
+
+  // find current user in DB:
+  const user = await this.findOne({ email })
+  if (!user) { throw Error('Incorrect email') }
+
+  // checks if passwords match (comparing current userPassword and userHashed in DB):
+  const match = await bcrypt.compare(password, user.password)
+  if (!match) { throw Error('Incorrect password') }
+
+  return user
 }
 
 module.exports = mongoose.model('User', userSchema)
