@@ -28,26 +28,19 @@ const getComplaint = async (req, res) => {
 
 // * POST a new complaint
 const createComplaint = async (req, res) => {
+  // TODO: add images here:
   const {title, department, location, description} = req.body
 
   // start to create custom error messages:
   let emptyFields = []
 
-  if (!title) {
-    emptyFields.push('title')
-  }
-  if (!department) {
-    emptyFields.push('department')
-  }
-  if (!location) {
-    emptyFields.push('location')
-  }
-  if (!description) {
-    emptyFields.push('description')
-  }
-  // if (!images) {
-  //   emptyFields.push('images')
-  // }
+  if (!title) { emptyFields.push('title') }
+  if (!department) { emptyFields.push('department') }
+  if (!location) { emptyFields.push('location') }
+  if (!description) { emptyFields.push('description') }
+
+  // TODO: if (!images) { emptyFields.push('images') }
+
   if (emptyFields.length > 0) {
     return res.status(400).json({error: 'All fields are mandatory', emptyFields})
   }
