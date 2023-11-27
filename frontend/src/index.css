@@ -213,6 +213,10 @@ nav span {
   margin-right: 15px;
 }
 
+span.user-logged {
+  font-weight: 300;
+}
+
 /* User login and Register forms */
 form.login, form.register {
   max-width: 400px;
