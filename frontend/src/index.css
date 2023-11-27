@@ -121,8 +121,8 @@ header a {
 /* New Complaint Form */
 .create {
   position: fixed;
-  right: 12%;
-  width: 25%;
+  left: 65%;
+  min-width: 20%;
 }
 
 form h3 {
@@ -206,5 +206,14 @@ nav span {
 
 /* User login and Register forms */
 form.login, form.register {
-  margin-top: 100px;
+  max-width: 400px;
+  padding: 20px;
+  margin: 120px auto;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form > button {
+  width: 90px;
 }
