@@ -200,6 +200,15 @@ nav button {
   cursor: pointer;
 }
 
+nav button:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+nav button:active {
+  transform: scale3d(95%, 95%, 95%);
+}
+
 nav span {
   margin-right: 15px;
 }
