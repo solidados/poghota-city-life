@@ -3,25 +3,27 @@ const Complaint = require('../models/complaintModel')
 
 // * GET all complaints
 const getAllComplaints = async (req, res) => {
+  const user_id = req.user._id
+
   const complaints = await Complaint
-    .find({})
-    .sort({createdAt: -1})
+    .find({ user_id })
+    .sort({ createdAt: -1 })
 
   res.status(200).json(complaints)
 }
 
 // * GET a single complaint
 const getComplaint = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such complaint was found'})
+    return res.status(404).json({ error: 'No such complaint was found' })
   }
 
   const complaint = await Complaint.findById(id)
 
   if (!complaint) {
-    return res.status(404).json({error: 'No such complaint was found'})
+    return res.status(404).json({ error: 'No such complaint was found' })
   }
   res.status(200).json(complaint)
 }
@@ -29,7 +31,7 @@ const getComplaint = async (req, res) => {
 // * POST a new complaint
 const createComplaint = async (req, res) => {
   // TODO: add images here:
-  const {title, department, location, description} = req.body
+  const { title, department, location, description } = req.body
 
   // start to create custom error messages:
   let emptyFields = []
@@ -42,31 +44,32 @@ const createComplaint = async (req, res) => {
   // TODO: if (!images) { emptyFields.push('images') }
 
   if (emptyFields.length > 0) {
-    return res.status(400).json({error: 'All fields are mandatory', emptyFields})
+    return res.status(400).json({ error: 'All fields are mandatory', emptyFields })
   }
 
   // * add document to DB
   try {
-    const complaint = await Complaint.create({title, department, location, description})
+    const user_id = req.user._id
+    const complaint = await Complaint.create({ title, department, location, description, user_id })
     res.status(200).json(complaint)
   }
   catch (e) {
-    res.status(400).json({error: e.message})
+    res.status(400).json({ error: e.message })
   }
 }
 
 // * DELETE a complaint
 const deleteComplaint = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such complaint was found'})
+    return res.status(404).json({ error: 'No such complaint was found' })
   }
 
-  const complaint = await Complaint.findOneAndDelete({_id: id})
+  const complaint = await Complaint.findOneAndDelete({ _id: id })
 
   if (!complaint) {
-    return res.status(400).json({error: 'No such complaint was found'})
+    return res.status(400).json({ error: 'No such complaint was found' })
   }
 
   res.status(200).json(complaint)
@@ -74,18 +77,18 @@ const deleteComplaint = async (req, res) => {
 
 // * PATCH a complaint
 const updateComplaint = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such complaint was found'})
+    return res.status(404).json({ error: 'No such complaint was found' })
   }
 
-  const complaint = await Complaint.findOneAndUpdate({_id: id}, {
+  const complaint = await Complaint.findOneAndUpdate({ _id: id }, {
     ...req.body
   })
 
   if (!complaint) {
-    return res.status(400).json({error: 'No such complaint was found'})
+    return res.status(400).json({ error: 'No such complaint was found' })
   }
 
   res.status(200).json(complaint)
