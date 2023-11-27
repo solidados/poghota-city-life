@@ -1,24 +1,34 @@
-import {useEffect} from "react";
-import {useComplaintsContext} from "../hooks/useComplaintsContext";
+import { useEffect } from "react";
+import { useComplaintsContext } from "../hooks/useComplaintsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // components
 import ComplaintDetails from "../components/ComplaintDetails";
 import ComplaintForm from "../components/ComplaintForm";
 
 const Home = () => {
-  const {complaints, dispatch} = useComplaintsContext()
+  const { complaints, dispatch } = useComplaintsContext()
+  const { user } = useAuthContext()
+
   useEffect(() => {
     const fetchComplaints = async () => {
-      const response = await fetch('/api/complaints');
+      const response = await fetch('/api/complaints', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
 
       if (response.ok) {
-        dispatch({type: 'SET_COMPLAINTS', payload: json})
+        dispatch({ type: 'SET_COMPLAINTS', payload: json })
       }
     }
 
-    fetchComplaints().catch((e) => console.error(e.message))
-  }, [dispatch]);
+    if (user) {
+      fetchComplaints().catch((e) => console.error(e.message))
+    }
+
+  }, [dispatch, user]);
   return (
     <div className="home">
       <div className="complaints">

@@ -1,8 +1,10 @@
-import {useState} from "react";
-import {useComplaintsContext} from "../hooks/useComplaintsContext";
+import { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useComplaintsContext } from "../hooks/useComplaintsContext";
 
 const ComplaintForm = () => {
-  const {dispatch} = useComplaintsContext()
+  const { dispatch } = useComplaintsContext()
+  const { user } = useAuthContext()
 
   const [title, setTitle] = useState('')
   const [department, setDepartment] = useState('')
@@ -14,13 +16,19 @@ const ComplaintForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const complaint = {title, department, location, description}
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
+
+    const complaint = { title, department, location, description }
 
     const response = await fetch('/api/complaints', {
       method: 'POST',
       body: JSON.stringify(complaint),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json()
@@ -37,7 +45,7 @@ const ComplaintForm = () => {
       setError(null)
       setEmptyFields([])
       console.log('New complaint was added')
-      dispatch({type: 'CREATE_COMPLAINT', payload: json})
+      dispatch({ type: 'CREATE_COMPLAINT', payload: json })
     }
   }
 
