@@ -203,3 +203,8 @@ nav button {
 nav span {
   margin-right: 15px;
 }
+
+/* User login and Register forms */
+form.login, form.register {
+  margin-top: 100px;
+}
