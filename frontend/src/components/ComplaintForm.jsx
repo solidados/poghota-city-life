@@ -9,6 +9,7 @@ const ComplaintForm = () => {
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ const ComplaintForm = () => {
 
     if (!response.ok) {
       setError(json.error)
+      setEmptyFields(json.emptyFields)
     }
     if (response.ok) {
       setTitle('')
@@ -33,6 +35,7 @@ const ComplaintForm = () => {
       setLocation('')
       setDescription('')
       setError(null)
+      setEmptyFields([])
       console.log('New complaint was added')
       dispatch({type: 'CREATE_COMPLAINT', payload: json})
     }
@@ -48,6 +51,7 @@ const ComplaintForm = () => {
           onChange={(e) => {setTitle(e.target.value)}}
           name="title"
           value={title}
+          className={emptyFields.includes('title') ? 'error' : ''}
           maxLength={40}
         />
       </label>
@@ -56,6 +60,7 @@ const ComplaintForm = () => {
           onChange={(e) => {setDepartment(e.target.value)}}
           name="department"
           value={department}
+          className={emptyFields.includes('department') ? 'error' : ''}
         >
           <option value=""></option>
           <option value="Council">Council</option>
@@ -70,6 +75,7 @@ const ComplaintForm = () => {
           onChange={(e) => {setLocation(e.target.value)}}
           name="location"
           value={location}
+          className={emptyFields.includes('location') ? 'error' : ''}
         />
       </label>
       <label>Description:
@@ -78,6 +84,7 @@ const ComplaintForm = () => {
           onChange={(e) => {setDescription(e.target.value)}}
           name="description"
           value={description}
+          className={emptyFields.includes('description') ? 'error' : ''}
           maxLength={1000}
         />
       </label>

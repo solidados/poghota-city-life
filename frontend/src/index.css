@@ -121,8 +121,8 @@ header a {
 /* New Complaint Form */
 .create {
   position: fixed;
-  right: 25px;
-  width: 30%;
+  right: 12%;
+  width: 25%;
 }
 
 form h3 {
@@ -131,6 +131,13 @@ form h3 {
 
 label, input, select, textarea {
   display: block;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.1dvmax;
 }
 
 input, select, textarea {
@@ -167,7 +174,7 @@ div.error {
   color: var(--error);
 }
 
-input.error {
+input.error, select.error, textarea.error {
   outline: 1px solid var(--error);
   outline-offset: 1px;
 }

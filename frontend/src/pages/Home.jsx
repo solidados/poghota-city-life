@@ -18,7 +18,7 @@ const Home = () => {
     }
 
     fetchComplaints().catch((e) => console.error(e.message))
-  }, []);
+  }, [dispatch]);
   return (
     <div className="home">
       <div className="complaints">
