@@ -1,44 +1,22 @@
-const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
-const createToken = (_id) => {
-  return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
-}
-
-// login user
+// * login user
 const loginUser = async (req, res) => {
-  const {email, password} = req.body
-
-  try {
-    const user = await User.login(email, password)
-
-    // create a token
-    const token = createToken(user._id)
-
-    res.status(200).json({email, token})
-  }
-  catch (error) {
-    res.status(400).json({error: error.message})
-  }
+  res.json({ mssg: 'User logged in' })
 }
 
-// register user
+// * register user
 const registerUser = async (req, res) => {
-  const {email, password} = req.body
+  const { email, password } = req.body
+
   try {
     const user = await User.register(email, password)
 
-    // create a token
-    const token = createToken(user._id)
-
-    res.status(200).json({email, token})
+    res.status(200).json({ email, user })
   }
-  catch (error) {
-    res.status(400).json({error: error.message})
+  catch (e) {
+    res.status(400).json({ error: e.message })
   }
 }
 
-module.exports = {
-  loginUser,
-  registerUser
-}
+module.exports = { loginUser, registerUser }
