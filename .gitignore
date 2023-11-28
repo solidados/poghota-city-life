@@ -5,6 +5,7 @@
 .idea/
 
 # Project folders to be ignored:
+venv/
 
 # Logs
 logs

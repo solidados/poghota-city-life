@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useRegister } from '../hooks/useRegister'
 
 const Register = () => {
+  // const [name, setName] = useState('')
+  // const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
+  // const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
   const { register, isLoading, error } = useRegister()
 
@@ -23,6 +26,7 @@ const Register = () => {
           value={email}
         />
       </label>
+
       <label>Password:
         <input
           type="password"
@@ -37,3 +41,28 @@ const Register = () => {
 };
 
 export default Register;
+
+/* <label>Name:
+        <input
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+      </label>
+      <label>Surname:
+        <input
+          type="text"
+          onChange={(e) => setSurname(e.target.value)}
+          value={surname}
+        />
+      </label>
+<label>Phone:
+        <input
+          type="tel"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phoneNumber}
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+/>
+</label>
+
+*/

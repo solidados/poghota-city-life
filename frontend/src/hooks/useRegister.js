@@ -10,11 +10,13 @@ export const useRegister = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/register', {
+    // const response = await fetch('/api/user/register', {
+    const response = await fetch('http://127.0.0.1:5000/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     })
+
     const json = await response.json()
 
     if (!response.ok) {
