@@ -19,14 +19,14 @@ users_collection = db["users"]
 @app.route('/register', methods=['POST'])
 def register_user():
     data = request.get_json()
-#     name = data.get('name')
-#     surname = data.get('surname')
+    name = data.get('name')
+    surname = data.get('surname')
     email = data.get('email')
-#     phone_number = data.get('phone_number')
+    phone_number = data.get('phone_number')
     password = data.get('password')
 
-#     if not name or not surname or not email or not phone_number or not password:
-#         return jsonify({"error": "All fields are required"}), 400
+    if not name or not surname or not email or not phone_number or not password:
+        return jsonify({"error": "All fields are required!"}), 400
 
     if users_collection.find_one({"email": email}):
         return jsonify({"error": "Email is already taken"}), 400
@@ -34,10 +34,10 @@ def register_user():
     hashed_password = generate_password_hash(password)
 
     user_data = {
-#         "name": name,
-#         "surname": surname,
+        "name": name,
+        "surname": surname,
         "email": email,
-#         "phone_number": phone_number,
+        "phone_number": phone_number,
         "password": hashed_password
     }
 
