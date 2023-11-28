@@ -6,8 +6,7 @@ from pymongo.errors import ConnectionFailure
 
 app = Flask(__name__)
 CORS(app)
-# client = MongoClient("mongodb://localhost:27017/")
-client = MongoClient("mongodb+srv://solidados:W@lnutwindow97@cluster0.c7yvaxi.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb://localhost:27017/")
 
 try:
     client.admin.command('ping')
