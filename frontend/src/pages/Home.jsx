@@ -4,7 +4,7 @@
 
 // components
 // import ComplaintDetails from "../components/ComplaintDetails";
-import ComplaintForm from "../components/ComplaintForm";
+// import ComplaintForm from "../components/ComplaintForm";
 
 const Home = () => {
   // const { complaints, dispatch } = useComplaintsContext()
@@ -31,14 +31,14 @@ const Home = () => {
   // }, [dispatch, user]);
   return (
     <div className="home">
-      <div className="complaints">
-        {/*{complaints && complaints.map((complaint) => (*/}
-        {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}
-        {/*))}*/}
-      </div>
-      <aside>
-        <ComplaintForm />
-      </aside>
+      {/*<div className="complaints">*/}
+      {/*{complaints && complaints.map((complaint) => (*/}
+      {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}
+      {/*))}*/}
+      {/*</div>*/}
+      {/*<aside>*/}
+      {/*  <ComplaintForm />*/}
+      {/*</aside>*/}
     </div>
   );
 };

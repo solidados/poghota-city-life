@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -15,21 +15,23 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
-        <Link to="/">
+        <NavLink to="/">
           <img className="navbar-logo" src={logo} alt="logo" />
-        </Link>
+        </NavLink>
         <nav>
           {user && (
             <div>
-              {/* TODO: change to user.name */}
-              <span className="user-logged">{user.email}</span>
+              {/* TODO: set to user.name || user.email? */}
+              <NavLink to="/account">
+                <span className="user-logged">{`Welcome ${user.name}`}</span>
+              </NavLink>
               <button onClick={handleClick}>Logout</button>
             </div>
           )}
           {!user && (
             <div>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/register">Register</NavLink>
             </div>
           )}
         </nav>
