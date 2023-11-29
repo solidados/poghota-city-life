@@ -94,7 +94,15 @@ def add_complaint():
     }
 
     result = complaints_collection.insert_one(complaint_data)
-    return jsonify({"message": "Complaint added successfully", "complaint_id": str(result.inserted_id)}), 201
+    # return jsonify({"message": "Complaint added successfully", "complaint_id": str(result.inserted_id)}), 201
+    added_complaint = complaints_collection.find_one({"_id": result.inserted_id}, {"_id": 0})
+
+    return jsonify({
+        "message": "Complaint added successfully",
+        "complaint_id": str(result.inserted_id),
+        "complaint_data": added_complaint
+    }), 201
+
 
 
 if __name__ == '__main__':
