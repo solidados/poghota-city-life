@@ -31,11 +31,11 @@ const Home = () => {
   // }, [dispatch, user]);
   return (
     <div className="home">
-      <div className="complaints">
-        {/*{complaints && complaints.map((complaint) => (*/}
-        {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}
-        {/*))}*/}
-      </div>
+      {/*<div className="complaints">*/}
+      {/*{complaints && complaints.map((complaint) => (*/}
+      {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}
+      {/*))}*/}
+      {/*</div>*/}
       <aside>
         <ComplaintForm />
       </aside>
