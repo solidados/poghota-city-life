@@ -57,8 +57,14 @@ header a {
 .home {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 60px;
+  height: 100vh;
   margin-top: 100px;
+  gap: 60px;
+}
+
+.complaints {
+  height: max-content;
+  overflow: auto;
 }
 
 .complaint-details {
@@ -119,10 +125,9 @@ header a {
 }
 
 /* New Complaint Form */
-.create {
-  position: fixed;
-  left: 65%;
-  min-width: 20%;
+aside {
+  position: sticky;
+  top: 0;
 }
 
 form h3 {
