@@ -4,7 +4,7 @@
 
 // components
 // import ComplaintDetails from "../components/ComplaintDetails";
-import ComplaintForm from "../components/ComplaintForm";
+// import ComplaintForm from "../components/ComplaintForm";
 
 const Home = () => {
   // const { complaints, dispatch } = useComplaintsContext()
@@ -36,9 +36,9 @@ const Home = () => {
       {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}
       {/*))}*/}
       {/*</div>*/}
-      <aside>
-        <ComplaintForm />
-      </aside>
+      {/*<aside>*/}
+      {/*  <ComplaintForm />*/}
+      {/*</aside>*/}
     </div>
   );
 };

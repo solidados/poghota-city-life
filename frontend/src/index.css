@@ -1,17 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Lato:wght@100;300;400;700&family=Poppins:wght@300;400;500;600;800&display=swap');
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-/* layout */
 :root {
   --primary: rgb(106, 180, 201);
   --secondary: rgb(62, 104, 161);
   --text: rgb(25, 39, 86);
   --error: #e7185a;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -22,6 +21,7 @@ body {
   background: #f1f1f1;
 }
 
+/* --- navigation --- */
 header {
   position: fixed;
   z-index: 100;
@@ -43,11 +43,6 @@ header a {
   color: var(--text);
 }
 
-.pages {
-  max-width: 1200px;
-  padding: 20px;
-  margin: 0 auto;
-}
 
 .navbar-logo {
   width: 80px;
@@ -62,15 +57,61 @@ nav a.active {
   border-bottom: 3px solid var(--primary);
 }
 
-/* Home page*/
+/* --- navbar --- */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 10px;
+}
+
+nav button {
+  padding: 6px 10px;
+  background: #ffffff;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+nav button:active {
+  transform: scale3d(95%, 95%, 95%);
+}
+
+nav span {
+  margin-right: 15px;
+}
+
+span.user-logged {
+  font-weight: 300;
+}
+
+.pages {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* --- Home page --- */
 .home {
   display: grid;
   grid-template-columns: 2fr 1fr;
   height: 100vh;
   margin-top: 100px;
   gap: 60px;
+  transition: opacity 0.5s cubic-bezier(0.39, 0.06, 0.4, 1);
 }
 
+/* --- complaints --- */
 .complaints {
   height: max-content;
   overflow: auto;
@@ -133,7 +174,7 @@ nav a.active {
   transform: scale3d(95%, 95%, 95%);
 }
 
-/* New Complaint Form */
+/* --- New Complaint Form --- */
 aside {
   position: sticky;
   top: 0;
@@ -193,45 +234,7 @@ input.error, select.error, textarea.error {
   outline-offset: 1px;
 }
 
-/* navbar */
-nav {
-  display: flex;
-  align-items: center;
-}
-
-nav a {
-  margin-left: 10px;
-}
-
-nav button {
-  padding: 6px 10px;
-  background: #ffffff;
-  border: 1px solid var(--primary);
-  border-radius: 4px;
-  font-family: "Poppins", sans-serif;
-  font-size: 1em;
-  color: var(--primary);
-  cursor: pointer;
-}
-
-nav button:hover {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-nav button:active {
-  transform: scale3d(95%, 95%, 95%);
-}
-
-nav span {
-  margin-right: 15px;
-}
-
-span.user-logged {
-  font-weight: 300;
-}
-
-/* User login and Register forms */
+/* --- User login and Register forms --- */
 form.login, form.register {
   max-width: 400px;
   padding: 20px;
@@ -245,7 +248,7 @@ form > button {
   width: 90px;
 }
 
-/* Not Found Page */
+/* --- Not Found Page --- */
 .not-found {
   display: flex;
   flex-direction: column;
