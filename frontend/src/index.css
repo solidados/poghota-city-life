@@ -53,6 +53,11 @@ header a {
   width: 80px;
 }
 
+nav a.active {
+  padding-bottom: 3px;
+  border-bottom: 3px solid var(--secondary);
+}
+
 /* Home page*/
 .home {
   display: grid;
