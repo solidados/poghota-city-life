@@ -1,4 +1,4 @@
-#import logging
+# import logging
 import jwt
 from datetime import datetime, timedelta
 from bson import ObjectId
@@ -17,6 +17,7 @@ client = MongoClient("mongodb://localhost:27017/")
 #     client.admin.command('ping')
 # except ConnectionFailure:
 #     print("Server not available")
+
 db = client["poghota"]
 users_collection = db["users"]
 complaints_collection = db["complaints"]
@@ -48,10 +49,10 @@ def register_user():
     }
 
     result = users_collection.insert_one(user_data)
-
-    # return jsonify({"message": "User registered successfully", "user_id": str(result.inserted_id)}), 201
+    user = users_collection.find_one({"email": email})
     user_data["_id"] = str(result.inserted_id)
-    return jsonify({"message": "User registered successfully", "user": user_data}), 201
+    return jsonify({"message": "User registered successfully", "user": user_data, "name": user["name"]}), 201
+
 
 @app.route('/login', methods=['POST'])
 def login_user():
