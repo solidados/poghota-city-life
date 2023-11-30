@@ -49,8 +49,9 @@ def register_user():
 
     result = users_collection.insert_one(user_data)
 
-    return jsonify({"message": "User registered successfully", "user_id": str(result.inserted_id)}), 201
-
+    # return jsonify({"message": "User registered successfully", "user_id": str(result.inserted_id)}), 201
+    user_data["_id"] = str(result.inserted_id)
+    return jsonify({"message": "User registered successfully", "user": user_data}), 201
 
 @app.route('/login', methods=['POST'])
 def login_user():
@@ -67,7 +68,7 @@ def login_user():
         token = jwt.encode({'email': email, 'exp': expiration}, 'secret-key', algorithm='HS256')
         # return jsonify({"message": "Login successful"}), 200
         # print(f"Generated Token: {token}")
-        return jsonify({"message": "Login successful", "token": token}), 200
+        return jsonify({"message": "Login successful", "token": token, "name": user["name"]}), 200
     else:
         return jsonify({"error": "Invalid email or password"}), 401
 
@@ -102,7 +103,6 @@ def add_complaint():
         "complaint_id": str(result.inserted_id),
         "complaint_data": added_complaint
     }), 201
-
 
 
 if __name__ == '__main__':
