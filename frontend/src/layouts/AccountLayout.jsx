@@ -9,7 +9,7 @@ function AccountLayout () {
     <div className="user-account">
       <h2>{`${user.name}'s account`}</h2>
       <nav>
-        <NavLink to="prfile">Profile</NavLink>
+        <NavLink to="profile">Profile</NavLink>
         <NavLink to="complaints">Complaints</NavLink>
       </nav>
 

@@ -248,6 +248,12 @@ form > button {
   width: 90px;
 }
 
+/* --- User Account --- */
+.user-account {
+  margin: 100px auto;
+  padding: 20px;
+}
+
 /* --- Not Found Page --- */
 .not-found {
   display: flex;

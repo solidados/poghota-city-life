@@ -23,7 +23,7 @@ const Navbar = () => {
             <div>
               {/* TODO: set to user.name || user.email? */}
               <NavLink to="/account">
-                <span className="user-logged">{`Welcome ${user.name}`}</span>
+                <span className="user-logged">{`Welcome ${user.email}`}</span>
               </NavLink>
               <button onClick={handleClick}>Logout</button>
             </div>
