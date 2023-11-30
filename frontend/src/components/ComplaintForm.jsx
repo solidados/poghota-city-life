@@ -23,7 +23,7 @@ const ComplaintForm = () => {
 
     const complaint = { title, department, location, description }
 
-    const response = await fetch('/api/complaints', {
+    const response = await fetch('http://127.0.0.1:5000/account/complaints', {
       method: 'POST',
       body: JSON.stringify(complaint),
       headers: {

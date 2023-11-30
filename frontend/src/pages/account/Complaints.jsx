@@ -4,6 +4,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 // components
 import ComplaintDetails from "../../components/ComplaintDetails";
+import ComplaintForm from "../../components/ComplaintForm";
 
 
 function Complaints () {
@@ -12,7 +13,7 @@ function Complaints () {
 
   useEffect(() => {
     const fetchComplaints = async () => {
-      const response = await fetch('/api/complaints', {
+      const response = await fetch('http://127.0.0.1:5000/account/complaints', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -35,6 +36,9 @@ function Complaints () {
       {complaints && complaints.map((complaint) => (
         <ComplaintDetails key={complaint._id} complaint={complaint} />
       ))}
+      <aside>
+        <ComplaintForm />
+      </aside>
     </div>
   );
 }
