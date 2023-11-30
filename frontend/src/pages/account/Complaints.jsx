@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+
+// hooks
 import { useComplaintsContext } from "../../hooks/useComplaintsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -13,7 +15,7 @@ function Complaints () {
 
   useEffect(() => {
     const fetchComplaints = async () => {
-      const response = await fetch('http://127.0.0.1:5000/account/complaints', {
+      const response = await fetch('/complaints', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

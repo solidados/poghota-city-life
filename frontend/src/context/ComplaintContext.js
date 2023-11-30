@@ -1,4 +1,4 @@
-import {createContext, useReducer} from "react";
+import { createContext, useReducer } from "react";
 
 export const ComplaintsContext = createContext();
 
@@ -10,7 +10,7 @@ export const complaintsReducer = (state, action) => {
       }
     case 'CREATE_COMPLAINT':
       return {
-        complaints: [action.payload, ...state.complaints]
+        complaints: [action.payload, state.complaints]
       }
     case 'DELETE_COMPLAINT':
       return {
@@ -21,14 +21,14 @@ export const complaintsReducer = (state, action) => {
   }
 }
 
-export const ComplaintsContextProvider = ({children}) => {
+export const ComplaintsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(complaintsReducer, {
     complaints: null
   })
 
 
   return (
-    <ComplaintsContext.Provider value={{...state, dispatch}}>
+    <ComplaintsContext.Provider value={{ ...state, dispatch }}>
       {children}
     </ComplaintsContext.Provider>
   )
