@@ -6,6 +6,8 @@
 // import ComplaintDetails from "../components/ComplaintDetails";
 // import ComplaintForm from "../components/ComplaintForm";
 
+import WelcomeSection from "../components/WelcomeSection";
+
 const Home = () => {
   // const { complaints, dispatch } = useComplaintsContext()
   // const { user } = useAuthContext()
@@ -31,6 +33,7 @@ const Home = () => {
   // }, [dispatch, user]);
   return (
     <div className="home">
+      <WelcomeSection />
       {/*<div className="complaints">*/}
       {/*{complaints && complaints.map((complaint) => (*/}
       {/*  <ComplaintDetails key={complaint._id} complaint={complaint} />*/}

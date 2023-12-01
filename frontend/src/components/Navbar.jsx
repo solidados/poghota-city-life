@@ -19,6 +19,9 @@ const Navbar = () => {
           <img className="navbar-logo" src={logo} alt="logo" />
         </NavLink>
         <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
           {user && (
             <div>
               {/* TODO: set to user.name || user.email? */}
@@ -31,7 +34,7 @@ const Navbar = () => {
           {!user && (
             <div>
               <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
+              {/*<NavLink to="/register">Register</NavLink>*/}
             </div>
           )}
         </nav>

@@ -22,6 +22,7 @@ const Register = () => {
       <label>First Name:
         <input
           type="text"
+          name="firsName"
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
@@ -29,6 +30,7 @@ const Register = () => {
       <label>Surname:
         <input
           type="text"
+          name="surName"
           onChange={(e) => setSurname(e.target.value)}
           value={surname}
         />
@@ -37,6 +39,7 @@ const Register = () => {
       <label>Email:
         <input
           type="email"
+          name="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
@@ -44,15 +47,18 @@ const Register = () => {
       <label>Phone:
         <input
           type="tel"
+          name="tel"
           onChange={(e) => setPhoneNumber(e.target.value)}
           value={phone_number}
-          // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          // pattern="+[0-9]{3}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}"
+          placeholder="+37411223344"
         />
       </label>
 
       <label>Password:
         <input
           type="password"
+          name="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
