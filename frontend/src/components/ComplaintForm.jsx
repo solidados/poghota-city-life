@@ -21,9 +21,11 @@ const ComplaintForm = () => {
       return
     }
 
-    const complaint = { title, department, location, description }
+    const currentDateTime = new Date().toISOString()
 
-    const response = await fetch('http://127.0.0.1:5000/complaints', {
+    const complaint = { title, department, location, description, date_added: currentDateTime, }
+
+    const response = await fetch('http://127.0.0.1:5000/account/complaints', {
       method: 'POST',
       body: JSON.stringify(complaint),
       headers: {
@@ -32,6 +34,7 @@ const ComplaintForm = () => {
       }
     })
     const json = await response.json()
+    console.log("json:  ",json)
 
     if (!response.ok) {
       setError(json.error)
@@ -44,8 +47,9 @@ const ComplaintForm = () => {
       setDescription('')
       setError(null)
       setEmptyFields([])
-      console.log('New complaint was added')
+//       console.log('New complaint was added')
       dispatch({ type: 'CREATE_COMPLAINT', payload: json })
+      dispatch({ type: 'SET_COMPLAINTS', payload: json })
     }
   }
 
