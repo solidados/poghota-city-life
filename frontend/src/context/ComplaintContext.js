@@ -13,8 +13,10 @@ export const complaintsReducer = (state, action) => {
         complaints: [action.payload, state.complaints]
       }
     case 'DELETE_COMPLAINT':
+    console.log("cons:" ,state)
       return {
-        complaints: state.complaints.filter((complaint) => complaint._id !== action.payload._id)
+//        ...state,
+        complaints: state.complaints.complaints.filter((complaint) => complaint._id !== action.payload._id)
       }
     default:
       return state

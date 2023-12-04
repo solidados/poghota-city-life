@@ -8,19 +8,24 @@ const ComplaintDetails = ({ complaint }) => {
   const { dispatch } = useComplaintsContext()
   const { user } = useAuthContext()
 
+
   const handleClick = async () => {
     if (!user) return
 
-    const response = await fetch(`/api/complaints/${complaint._id}`, {
+      const response = await fetch(`http://127.0.0.1:5000/account/complaints/delete`,{
       method: 'DELETE',
       headers: {
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${user.token}`
-      }
-    })
-    const json = await response.json()
+      },
+      body: JSON.stringify({
+        complaint_id: complaint._id
+      })
+      })
 
+    const json = await response.json()
     if (response.ok) {
-      dispatch({ type: 'DELETE_COMPLAINT', payload: json })
+      dispatch({ type: 'SET_COMPLAINTS', payload: json })
     }
   }
 
@@ -30,7 +35,9 @@ const ComplaintDetails = ({ complaint }) => {
       <p><strong>Department: </strong>{complaint.department}</p>
       <p><strong>Description: </strong>{complaint.description}</p>
       <p><strong>Location: </strong>{complaint.location}</p>
-      <p className="complaint-created">{formatDistanceToNow(new Date(complaint.createdAt), { addSuffix: true })}</p>
+      <p className="complaint-created">
+        {`Created ${formatDistanceToNow(new Date(complaint.date_added), { addSuffix: true })}`}
+      </p>
       <span onClick={handleClick} className="material-symbols-outlined">delete</span>
     </div>
   );
