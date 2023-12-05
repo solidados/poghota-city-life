@@ -7,11 +7,15 @@ function AccountLayout () {
 
   return (
     <div className="user-account">
-      <h2>{`${user.name}'s account`}</h2>
-      <nav>
-        <NavLink to="profile">Profile</NavLink>
-        <NavLink to="complaints">Complaints</NavLink>
-      </nav>
+      <div className="account-left">
+        <div className="nav-container">
+          <h2>{`${user.name}'s account`}</h2>
+          <nav>
+            <NavLink to="profile">Profile</NavLink>
+            <NavLink to="complaints">Complaints</NavLink>
+          </nav>
+        </div>
+      </div>
 
       <Outlet />
     </div>
