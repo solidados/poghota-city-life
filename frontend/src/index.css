@@ -382,6 +382,7 @@ form.login, form.register {
 
 .user-nav {
   display: flex;
+  margin-bottom: 20px;
   gap: 10px;
 }
 

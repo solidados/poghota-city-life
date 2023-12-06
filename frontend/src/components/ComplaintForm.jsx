@@ -13,6 +13,33 @@ const ComplaintForm = () => {
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
+  const [files, setFiles] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+
+    // Check if the total number of files after adding selectedFiles will be more than 3
+    if (files.length + selectedFiles.length > 3) {
+      // Display a message or take any other action if needed
+      setError("You can upload only up to 3 files.")
+      return
+    }
+
+    // Update the files state with the selectedFiles
+    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+
+    // Disable the button if the total number of files is now 3
+    setIsButtonDisabled(files.length + selectedFiles.length === 2);
+  };
+
+  const handleUploadClick = () => {
+    // Implement your logic for handling the upload
+    // This function will be called when the user clicks the upload button
+    console.log("Uploading files:", files);
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,7 +61,7 @@ const ComplaintForm = () => {
       }
     })
     const json = await response.json()
-    console.log("json:  ",json)
+    console.log("json:  ", json)
 
     if (!response.ok) {
       setError(json.error)
@@ -89,6 +116,12 @@ const ComplaintForm = () => {
           value={location}
           className={emptyFields.includes('location') ? 'error' : ''}
         />
+      </label>
+      <label>Photo Report:
+        <input type="file" onChange={handleFileChange} multiple />
+        <button onClick={handleUploadClick} disabled={isButtonDisabled}>
+          Upload
+        </button>
       </label>
       <label>Description:
         <textarea
