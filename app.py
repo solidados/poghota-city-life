@@ -5,16 +5,31 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import os
+from dotenv import load_dotenv
+
 
 app = Flask(__name__)
 CORS(app)
-CORS(app, resources={r"/complaints": {"origins": "*", "methods": ["GET", "POST"]}})
+CORS(app, resources={r"/account/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS", "DELETE"]}})
+
+# load_dotenv()
+#
+# secret_key = os.environ.get('SECRET_KEY')
+
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/poghota'
 mongo = PyMongo(app)
 users_collection = mongo.db.users
 complaints_collection = mongo.db.complaints
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -64,7 +79,6 @@ def login_user():
     if user and check_password_hash(user['password'], password):
         user_id = str(user.get("_id"))
         expiration = datetime.utcnow() + timedelta(days=1)
-        # needs to be changed later
         token = jwt.encode({'id': user_id, 'exp': expiration}, app.config['SECRET_KEY'], algorithm='HS256')
         # return jsonify({"message": "Login successful"}), 200
         print(f"Generated Token: {token}")
@@ -103,19 +117,21 @@ def get_complaints():
     return jsonify({"complaints": user_complaints_list}), 200
 
 
-@app.route('/account/complaints', methods=['POST'])  # initial code
+@app.route('/account/complaints', methods=['POST'])
 def add_complaint():
     data = request.get_json()
     title = data.get('title')
     department = data.get('department')
     location = data.get('location')
     description = data.get('description')
+    files = data.get('files', [])
+
     token = request.headers.get('Authorization')
 
     if not token or not token.startswith('Bearer '):
         return jsonify({"error": "Invalid token format"}), 401
 
-    token = token.split('Bearer ')[1]  # Extract the actual token part
+    token = token.split('Bearer ')[1]
 
     try:
         decoded_token = jwt.decode(token, 'secret-key', algorithms=['HS256'])
@@ -135,6 +151,18 @@ def add_complaint():
         "user_id": user_id,
         "date_added": current_date
     }
+
+    for file in files:
+        filename = secure_filename(file.get('name'))
+        file_content = file.get('content')
+
+        if not filename or not file_content:
+            return jsonify({"error": "Invalid file data"}), 400
+
+        complaint_data.setdefault("files", []).append({
+            "name": filename,
+            "content": file_content
+        })
 
     complaints_collection.insert_one(complaint_data)
 

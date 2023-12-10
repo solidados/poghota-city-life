@@ -16,7 +16,7 @@ const ComplaintForm = () => {
   const [files, setFiles] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
 
     // Check if the total number of files after adding selectedFiles will be more than 3
@@ -26,19 +26,30 @@ const ComplaintForm = () => {
       return
     }
 
+    const updatedFiles = await Promise.all(selectedFiles.map(async (file) => {
+        const base64Content = await readFileAsBase64(file);
+    return { name: file.name, base64: base64Content };
+  }));
     // Update the files state with the selectedFiles
-    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+    setFiles([...files, ...updatedFiles]);
 
     // Disable the button if the total number of files is now 3
     setIsButtonDisabled(files.length + selectedFiles.length === 2);
   };
 
-  const handleUploadClick = () => {
-    // Implement your logic for handling the upload
-    // This function will be called when the user clicks the upload button
-    console.log("Uploading files:", files);
-  };
-  
+//   const handleUploadClick = () => {
+//     // Implement your logic for handling the upload
+//     // This function will be called when the user clicks the upload button
+//     console.log("Uploading files:", files);
+//   };
+  const readFileAsBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +61,16 @@ const ComplaintForm = () => {
 
     const currentDateTime = new Date().toISOString()
 
-    const complaint = { title, department, location, description, date_added: currentDateTime, }
+    const complaint = {
+     title,
+     department,
+     location,
+     description,
+     date_added: currentDateTime,
+     files: files.map((file) => ({ name: file.name, content: file.base64 })),
+    };
+    console.log("files is: ", files)
+
 
     const response = await fetch('http://127.0.0.1:5000/account/complaints', {
       method: 'POST',
@@ -61,8 +81,7 @@ const ComplaintForm = () => {
       }
     })
     const json = await response.json()
-    console.log("json:  ", json)
-
+    console.log("complaint is: ", json)
     if (!response.ok) {
       setError(json.error)
       setEmptyFields(json.emptyFields)
@@ -119,9 +138,9 @@ const ComplaintForm = () => {
       </label>
       <label>Photo Report:
         <input type="file" onChange={handleFileChange} multiple />
-        <button onClick={handleUploadClick} disabled={isButtonDisabled}>
-          Upload
-        </button>
+{/*         <button onClick={handleUploadClick} disabled={isButtonDisabled}> */}
+{/*           Upload */}
+{/*         </button> */}
       </label>
       <label>Description:
         <textarea

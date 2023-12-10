@@ -232,7 +232,7 @@ nav > div > a.active {
 .complaint-details {
   position: relative;
   padding: 20px;
-  margin: 20px auto;
+  margin: 30px 30px;
   border-radius: 4px;
   background: #ffffff;
   box-shadow: 4px 2px 8px rgba(84, 84, 84, 0.4);

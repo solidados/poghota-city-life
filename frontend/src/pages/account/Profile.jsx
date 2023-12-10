@@ -64,7 +64,7 @@ function Profile () {
             value={password}
           />
         </label>
-        <button disabled={isLoading}>Register</button>
+        <button disabled={isLoading}>Update</button>
         {error && <div className="error">{error}</div>}
       </form>
     </div>
