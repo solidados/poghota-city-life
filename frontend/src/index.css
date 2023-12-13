@@ -107,7 +107,9 @@ nav > div > a.active {
 
 /* --- Pages --- */
 .pages {
+  max-width: 1360px;
   padding: 0 20px;
+  margin: 0 auto;
 }
 
 /* --- Home page --- */
@@ -155,23 +157,35 @@ nav > div > a.active {
 }
 
 .panel-one {
-  background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500);
+  background-image: url(./assets/city-21.jpg);
+  background-position: 19%;
+  background-repeat: no-repeat;
 }
 
 .panel-two {
-  background-image: url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500);
+  background-image: url(./assets/city-22.jpg);
+  background-position: 26%;
+  background-repeat: no-repeat;
 }
 
 .panel-three {
-  background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d);
+  background-image: url(./assets/city-23.jpg);
+  background-position: 33%;
+  background-repeat: no-repeat;
 }
 
 .panel-four {
-  background-image: url(https://source.unsplash.com/ITjiVXcwVng/1500x1500);
+
+  background-image: url(./assets/city-24.jpg);
+  background-position: 40%;
+  background-repeat: no-repeat;
 }
 
 .panel-five {
-  background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
+
+  background-image: url(./assets/city-25.jpg);
+  background-position: 47%;
+  background-repeat: no-repeat;
 }
 
 .panel > * {
@@ -269,6 +283,14 @@ nav > div > a.active {
   background: #f1f1f1;
   color: #333333;
   cursor: pointer;
+}
+
+.slick-arrow {
+  position: absolute;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background: none;
 }
 
 .material-symbols-outlined {
