@@ -1,18 +1,26 @@
+import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useComplaintsContext } from "../hooks/useComplaintsContext";
-import { useState } from "react";
-import defaultIcon from './uploads/default-icon.jpg';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
 // date fns:
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
+// components:
+import Slider from 'react-slick';
+import ImageModal from "./modal/ImageModal";
+import defaultIcon from './uploads/default-icon.jpg';
+
+// styles:
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 const ComplaintDetails = ({ complaint }) => {
   const { dispatch } = useComplaintsContext()
   const { user } = useAuthContext()
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const settings = {
     dots: true,
@@ -20,7 +28,7 @@ const ComplaintDetails = ({ complaint }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    beforeChange: (current, next) => setCurrentImageIndex(next),
+    beforeChange: (current, next) => setSelectedImageIndex(next),
   };
 
   const handleClick = async () => {
@@ -45,6 +53,15 @@ const ComplaintDetails = ({ complaint }) => {
     }
   }
 
+  const openModal = (index) => {
+    setSelectedImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="complaint-details">
       <h4>{complaint.title}</h4>
@@ -58,12 +75,21 @@ const ComplaintDetails = ({ complaint }) => {
           </p>
           <Slider {...settings}>
             {complaint.files.map((file, index) => (
-              <div key={index}>
-                <img src={`data:image/png;base64,${file.content}`} alt={`Complaint Photo ${index}`}
-                     style={{ maxWidth: '300px', margin: 'auto' }} />
+              <div key={index} onClick={() => openModal(index)}>
+                <img
+                  src={`data:image/png;base64,${file.content}`}
+                  alt={`Complaint Photo ${index}`}
+                  style={{ maxWidth: '300px', margin: 'auto' }}
+                />
               </div>
             ))}
           </Slider>
+          {isModalOpen && (
+            <ImageModal
+              imageUrl={`data:image/png;base64,${complaint.files[selectedImageIndex].content}`}
+              onClose={closeModal}
+            />
+          )}
         </div>
       ) : (
         <div className="complaint-photo">
