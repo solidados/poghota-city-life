@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
   Navigate,
-  RouterProvider
+  RouterProvider, useNavigate
 } from "react-router-dom";
 
 // hooks
@@ -20,16 +20,17 @@ import Complaints from "./pages/account/Complaints";
 import RootLayout from "./layouts/RootLayout";
 import AccountLayout from "./layouts/AccountLayout";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
 
 
 function App () {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         {/*<Route index element={user ? <Home /> : <Navigate to="/login" />} />*/}
-        <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="account" element={user ? <AccountLayout /> : <Navigate to="/login" />}>
@@ -40,6 +41,16 @@ function App () {
       </Route>
     )
   )
+
+  useEffect(() => {
+    if (sessionStorage.getItem('lastRoute')) {
+      router.navigate(sessionStorage.getItem('lastRoute'));
+    }
+    window.onbeforeunload = () => {
+      sessionStorage.setItem('lastRoute', window.location.pathname);
+    }
+  }, []);
+  
   return (
     <RouterProvider router={router} />
   );

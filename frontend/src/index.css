@@ -287,10 +287,17 @@ nav > div > a.active {
 
 .slick-arrow {
   position: absolute;
+  top: 50%;
   padding: 5px;
   border: 1px solid black;
   border-radius: 50%;
   background: none;
+}
+
+.slick-prev {
+  content: "<";
+  position: absolute;
+  left: 5%;
 }
 
 .material-symbols-outlined {
