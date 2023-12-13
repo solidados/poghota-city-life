@@ -9,7 +9,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
-
 const ComplaintDetails = ({ complaint }) => {
   const { dispatch } = useComplaintsContext()
   const { user } = useAuthContext()
@@ -27,7 +26,7 @@ const ComplaintDetails = ({ complaint }) => {
   const handleClick = async () => {
     if (!user) return
 
-      const response = await fetch(`http://127.0.0.1:5000/account/complaints/delete`,{
+    const response = await fetch(`http://127.0.0.1:5000/account/complaints/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +35,7 @@ const ComplaintDetails = ({ complaint }) => {
       body: JSON.stringify({
         complaint_id: complaint._id
       })
-      })
+    })
 
     const json = await response.json()
 
@@ -60,7 +59,8 @@ const ComplaintDetails = ({ complaint }) => {
           <Slider {...settings}>
             {complaint.files.map((file, index) => (
               <div key={index}>
-                <img src={`data:image/png;base64,${file.content}`} alt={`Complaint Photo ${index}`} style={{ maxWidth: '50%', margin: 'auto' }}/>
+                <img src={`data:image/png;base64,${file.content}`} alt={`Complaint Photo ${index}`}
+                     style={{ maxWidth: '300px', margin: 'auto' }} />
               </div>
             ))}
           </Slider>
@@ -68,9 +68,10 @@ const ComplaintDetails = ({ complaint }) => {
       ) : (
         <div className="complaint-photo">
           <p><strong>Photo: </strong></p>
-            <img src={defaultIcon} alt="Default Icon" style={{ maxWidth: '50%', display: 'block', margin: 'auto' }} />
+          <img src={defaultIcon} alt="Default Icon" style={{ maxWidth: '300px', display: 'block', margin: 'auto' }} />
         </div>
       )}
+
       <p className="complaint-created">
         {`Created ${formatDistanceToNow(new Date(complaint.date_added), { addSuffix: true })}`}
       </p>

@@ -124,7 +124,7 @@ nav > div > a.active {
 /* --- Welcome section --- */
 .section-one {
   width: 100%;
-  background: linear-gradient(to right, rgb(137, 206, 235), rgb(5, 42, 75));
+  background: linear-gradient(to right, rgba(137, 206, 235, 0.7), rgba(5, 42, 75, 0.9));
 }
 
 .panels {
@@ -246,7 +246,7 @@ nav > div > a.active {
 .complaint-details {
   position: relative;
   padding: 20px;
-  margin: 30px 30px;
+  margin: 20px 25px;
   border-radius: 4px;
   background: #ffffff;
   box-shadow: 4px 2px 8px rgba(84, 84, 84, 0.4);
@@ -395,11 +395,16 @@ form.login, form.register {
 
 /* --- User Account --- */
 .user-account {
-
   height: 100vh;
   padding: 20px 0;
   gap: 60px;
   transition: opacity 0.5s cubic-bezier(0.39, 0.06, 0.4, 1);
+}
+
+.user-account .container {
+  max-width: 1360px;
+  padding: 0 20px;
+  margin: 0 auto;
 }
 
 .user-nav {
