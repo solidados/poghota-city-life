@@ -4,11 +4,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="container">
-        <div className="section-one">
+      <section className="section-one">
+        <div className="container">
           <WelcomeSection />
         </div>
-      </div>
+      </section>
     </div>
   );
 };
