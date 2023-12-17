@@ -1,0 +1,143 @@
+.aboutUs {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+    align-items: center;
+}
+
+.aboutUs__intro {
+    display: flex;
+    margin-bottom: 50px;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+}
+.aboutUs__intro__text {
+    width: 100%;
+    color:  #000133;
+font-family: Inter;
+font-size: 20.5px;
+font-style: normal;
+font-weight: 400;
+
+}
+
+.aboutUs__intro__heading {
+    color: #000133;
+    font-family: Inter;
+    font-size: 82.5px;
+    font-style: normal;
+    font-weight: 400;
+}
+.aboutUs__missionsSection {
+    width: 100%;
+    display: flex; 
+    gap: 24px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+}
+.mission {
+    width: 100%;
+    max-width: 350px; 
+    height: 131px; 
+    gap: 24px;
+    padding: 24px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mission__id {
+color: #000133;
+font-family: Inter;
+font-size: 106px;
+font-style: normal;
+font-weight: 400;
+line-height: 110px; /* 103.774% */
+}
+
+.mission__text {
+color:  #000133;
+font-family: Inter;
+font-size: 20.5px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 117.073% */
+}
+
+.aboutUs__firstSection{
+    width: 100%;
+    height: 405px;
+    position: relative;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+.aboutUs__firstSection__img {
+    width: 720px;
+    height: 405px;
+    position: absolute;
+    right: 0px; 
+    z-index: 0;
+}
+
+.aboutUs__firstSection__text {
+    background-color: #000133;
+    text-align: left;
+    position: absolute;
+    top: -100px;
+    left: 0px; 
+    width: 900px;
+    color: #FFF;
+    padding: 50px;
+    font-family: Inter;
+    font-size: 82.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 82.5px;
+    z-index: 1; 
+}
+
+.aboutUs__thirdSection{
+    width: 100%;
+    height: 405px;
+    position: relative;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+.aboutUs__thirdSection__img {
+    width: 720px;
+    height: 405px;
+    position: absolute;
+    left: 0px; 
+    z-index: 0;
+}
+
+.aboutUs__thirdSection__text {
+background-color: #000133;
+text-align: right;
+position: absolute;
+top: -100px;
+right: 0px; 
+width: 900px;
+color: #FFF;
+padding: 50px;
+font-family: Inter;
+font-size: 82.5px;
+font-style: normal;
+font-weight: 400;
+line-height: 82.5px;
+z-index: 1; 
+}
+
+.aboutUs__markedText {
+    color: #FFF;
+    border-radius: 2px;
+    background-color: #241571;
+}

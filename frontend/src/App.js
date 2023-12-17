@@ -13,6 +13,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import Profile from "./pages/account/Profile";
 import Complaints from "./pages/account/Complaints";
 
@@ -31,6 +32,7 @@ function App () {
       <Route path="/" element={<RootLayout />}>
         {/*<Route index element={user ? <Home /> : <Navigate to="/login" />} />*/}
         <Route path="/" element={<Home />} />
+        <Route path = "about" element = {<AboutUs/>}/>
         <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="account" element={user ? <AccountLayout /> : <Navigate to="/login" />}>
