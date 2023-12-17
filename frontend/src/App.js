@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
   Navigate,
-  RouterProvider, useNavigate
+  RouterProvider,
 } from "react-router-dom";
 
 // hooks
@@ -32,7 +32,7 @@ function App () {
       <Route path="/" element={<RootLayout />}>
         {/*<Route index element={user ? <Home /> : <Navigate to="/login" />} />*/}
         <Route path="/" element={<Home />} />
-        <Route path = "about" element = {<AboutUs/>}/>
+        <Route path="about" element={<AboutUs />} />
         <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="account" element={user ? <AccountLayout /> : <Navigate to="/login" />}>
@@ -51,8 +51,8 @@ function App () {
     window.onbeforeunload = () => {
       sessionStorage.setItem('lastRoute', window.location.pathname);
     }
-  }, []);
-  
+  }, [router]);
+
   return (
     <RouterProvider router={router} />
   );
