@@ -9,16 +9,15 @@ from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 
-
+load_dotenv()
 app = Flask(__name__)
 CORS(app)
-CORS(app, resources={r"/account/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS", "DELETE"]}})
+CORS(app, resources={r"/register": {"origins": "*", "methods": ["POST"]}})
+CORS(app, resources={r"/account/*": {"origins": "*", "methods": ["GET", "POST", "PUT", "OPTIONS", "DELETE"]}})
 
-# load_dotenv()
-#
-# secret_key = os.environ.get('SECRET_KEY')
 
-app.config['SECRET_KEY'] = 'secret-key'
+secret_key = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = secret_key
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/poghota'
 mongo = PyMongo(app)
 users_collection = mongo.db.users
@@ -30,6 +29,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -64,7 +64,7 @@ def register_user():
     token = jwt.encode({'id': user_id, 'exp': expiration}, app.config['SECRET_KEY'], algorithm='HS256')
 
     return jsonify(
-        {"message": "User registered successfully", "user": user_data, "name": user["name"], "token": token}), 201
+        {"message": "User registered successfully", "user": user_data, "name": user["name"], "surname": user["surname"], "email": user["email"], "phone_number": user["phone_number"], "password" : password,"token": token}), 201
 
 
 @app.route('/login', methods=['POST'])
@@ -80,9 +80,8 @@ def login_user():
         user_id = str(user.get("_id"))
         expiration = datetime.utcnow() + timedelta(days=1)
         token = jwt.encode({'id': user_id, 'exp': expiration}, app.config['SECRET_KEY'], algorithm='HS256')
-        # return jsonify({"message": "Login successful"}), 200
-        print(f"Generated Token: {token}")
-        return jsonify({"message": "Login successful", "token": token, "name": user["name"]}), 200
+        # print(f"Generated Token: {token}")
+        return jsonify({"message": "Login successful", "token": token, "name": user["name"], "surname": user["surname"], "email": user["email"], "phone_number": user["phone_number"], "password" : password}), 200
     else:
         return jsonify({"error": "Invalid email or password"}), 401
 
@@ -90,21 +89,20 @@ def login_user():
 @app.route('/account/complaints', methods=['GET'])
 def get_complaints():
     token = request.headers.get('Authorization')
-
     if not token or not token.startswith('Bearer '):
         return jsonify({"error": "Invalid token format"}), 401
 
     token = token.split('Bearer ')[1]
 
     try:
-        decoded_token = jwt.decode(token, 'secret-key', algorithms=['HS256'])
+        decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         user_id = decoded_token.get('id')
     except jwt.ExpiredSignatureError:
         return jsonify({"error": "Token has expired"}), 401
     except jwt.InvalidTokenError:
         return jsonify({"error": "Invalid token"}), 401
 
-    print("Debug: User ID from Token:", user_id)
+    # print("Debug: User ID from Token:", user_id)
 
     complaints = complaints_collection.find({"user_id": user_id})
     user_complaints_list = [
@@ -134,7 +132,7 @@ def add_complaint():
     token = token.split('Bearer ')[1]
 
     try:
-        decoded_token = jwt.decode(token, 'secret-key', algorithms=['HS256'])
+        decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         user_id = decoded_token.get('id')
     except jwt.ExpiredSignatureError:
         return jsonify({"error": "Token has expired"}), 401
@@ -185,7 +183,7 @@ def delete_complaint():
 
     token = token.split('Bearer ')[1]  # Extract the actual token part
 
-    decoded_token = jwt.decode(token, 'secret-key', algorithms=['HS256'])
+    decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
     user_id = decoded_token.get('id')
 
     try:
@@ -203,6 +201,46 @@ def delete_complaint():
     # Delete the complaint
     mongo.db.complaints.delete_one({"_id": object_id})
     return get_complaints()
+
+
+@app.route('/account/profile', methods=['PUT'])
+def update_user_profile():
+    data = request.get_json()
+    # new_name = data.get('name')
+    new_email = data.get('email')
+    new_phone_number = data.get('phone_number')
+    new_password = data.get('password')
+
+    token = request.headers.get('Authorization')
+
+    if not token or not token.startswith('Bearer '):
+        return jsonify({"error": "Invalid token format"}), 401
+
+    token = token.split('Bearer ')[1]
+
+    try:
+        decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        user_id = decoded_token.get('id')
+    except jwt.ExpiredSignatureError:
+        return jsonify({"error": "Token has expired"}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({"error": "Invalid token"}), 401
+
+    update_data = {"email": new_email, "phone_number": new_phone_number}
+
+    if new_password:
+        hashed_password = generate_password_hash(new_password)
+        update_data["password"] = hashed_password
+
+    users_collection.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": update_data}
+    )
+
+    updated_user = users_collection.find_one({"_id": ObjectId(user_id)})
+    updated_user["_id"] = str(updated_user["_id"])
+
+    return jsonify({"message": "Profile updated successfully", "name": updated_user["name"], "surname": updated_user["surname"], "email": updated_user["email"], "phone_number": updated_user["phone_number"], "password": new_password, "token": token}), 200
 
 
 if __name__ == '__main__':

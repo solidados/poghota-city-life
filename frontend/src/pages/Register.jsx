@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useRegister } from '../hooks/useRegister'
+import { useRegister } from '../hooks/useRegister';
+import validator from 'email-validator';
 
 const Register = () => {
   const [name, setName] = useState('')
@@ -8,11 +9,18 @@ const Register = () => {
   const [phone_number, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
   const { register, isLoading, error } = useRegister()
-
+  const value = 'register'
+  const meth = 'POST'
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await register(name, surname, email, phone_number, password)
+    //add email validation
+    if (!validator.validate(email)) {
+      console.log('Invalid email format');
+      // Handle the case where the email is not in a valid format (e.g., show an error message)
+      return;
+    }
+    await register(name, surname, email, phone_number, password, value, meth)
   }
 
   return (

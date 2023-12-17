@@ -23,9 +23,9 @@ function Complaints () {
             'Authorization': `Bearer ${user.token}`
           }
         });
-
         if (response.ok) {
           const json = await response.json();
+
           dispatch({ type: 'SET_COMPLAINTS', payload: json });
         } else {
           console.error('Error fetching complaints:', response.statusText);
