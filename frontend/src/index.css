@@ -24,6 +24,7 @@ body {
   font-weight: 400;
   color: var(--text);
   background: #f1f1f1;
+  scroll-behavior: smooth;
 }
 
 /* --- navigation --- */

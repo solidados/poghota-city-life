@@ -5,23 +5,24 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import { useEffect } from "react";
 
 // hooks
 import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages
 import Home from "./pages/Home";
+import TeamPage from "./pages/Contact/TeamPage";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AboutUs from "./pages/AboutUs/AboutUs";
 import Profile from "./pages/account/Profile";
 import Complaints from "./pages/account/Complaints";
+import NotFound from "./pages/NotFound";
 
 // layouts
 import RootLayout from "./layouts/RootLayout";
 import AccountLayout from "./layouts/AccountLayout";
-import NotFound from "./pages/NotFound";
-import { useEffect } from "react";
 
 
 function App () {
@@ -33,6 +34,7 @@ function App () {
         {/*<Route index element={user ? <Home /> : <Navigate to="/login" />} />*/}
         <Route path="/" element={<Home />} />
         <Route path="about" element={<AboutUs />} />
+        <Route path="contact" element={<TeamPage />} />
         <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="account" element={user ? <AccountLayout /> : <Navigate to="/login" />}>
