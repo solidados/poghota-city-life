@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+// hooks:
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useComplaintsContext } from "../hooks/useComplaintsContext";
 
@@ -78,7 +80,7 @@ const ComplaintDetails = ({ complaint }) => {
               <div key={index} onClick={() => openModal(index)}>
                 <img
                   src={`data:image/png;base64,${file.content}`}
-                  alt={`Complaint Photo ${index}`}
+                  alt={`Complaint ${index}`}
                   style={{ maxWidth: '300px', margin: 'auto' }}
                 />
               </div>
@@ -94,7 +96,8 @@ const ComplaintDetails = ({ complaint }) => {
       ) : (
         <div className="complaint-photo">
           <p><strong>Photo: </strong></p>
-          <img src={defaultIcon} alt="Default Icon" style={{ maxWidth: '300px', display: 'block', margin: 'auto' }} />
+          <img src={defaultIcon} alt={`${complaint.title}`}
+               style={{ maxWidth: '300px', display: 'block', margin: 'auto' }} />
         </div>
       )}
 

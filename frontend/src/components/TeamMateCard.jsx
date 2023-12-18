@@ -1,3 +1,5 @@
+import TeamIcon from "./socialIcons/TeamIcon";
+
 const TeamMateCard = ({ teamMate }) => {
   return (
     <div className="teamMate-card">
@@ -5,9 +7,10 @@ const TeamMateCard = ({ teamMate }) => {
       <div className="teamMate-info">
         <h3>{teamMate.name}</h3>
         <p>{teamMate.position}</p>
-        <a href={teamMate.github} target="_blank" rel="noopener noreferrer">
-          {`${teamMate.name.split(' ')[0]}'s GitHub`}
-        </a>
+        <div className="social-icons">
+          <TeamIcon socialUrl={teamMate.github} />
+          <TeamIcon socialUrl={teamMate.linkedin} />
+        </div>
       </div>
     </div>
   );
