@@ -15,13 +15,9 @@ const Register = () => {
     e.preventDefault()
 
     //add email validation
-    // if (!validator.validate(email)) {
-      // console.log('Invalid email format');
-      // Handle the case where the email is not in a valid format (e.g., show an error message)
-      // return;
-   // }
-   await register(name, surname, email, phone_number, password, value, meth)
-	}
+
+    await register(name, surname, email, phone_number, password, value, meth)
+  }
 
   return (
     <form className="register" onSubmit={handleSubmit}>
