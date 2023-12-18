@@ -16,39 +16,39 @@ function WelcomeSection () {
           panelNum={"one"}
           upperText={"Hey"}
           midText={"Let's"}
-          lowerText={"Dance"}
+          lowerText={"Enjoy"}
           isOpen={openPanel === "one"}
           onToggleOpen={() => toggleOpen("one")}
         />
         <WelcomePanel
           panelNum={"two"}
-          upperText={"Give"}
-          midText={"Take"}
-          lowerText={"Receive"}
+          upperText={"You"}
+          midText={"Make"}
+          lowerText={"Change"}
           isOpen={openPanel === "two"}
           onToggleOpen={() => toggleOpen("two")}
         />
         <WelcomePanel
           panelNum={"three"}
-          upperText={"Experience"}
-          midText={"It"}
-          lowerText={"Today"}
+          upperText={"It's"}
+          midText={"Our"}
+          lowerText={"Home"}
           isOpen={openPanel === "three"}
           onToggleOpen={() => toggleOpen("three")}
         />
         <WelcomePanel
           panelNum={"four"}
-          upperText={"Give"}
-          midText={"All"}
-          lowerText={"You can"}
+          upperText={"Bring"}
+          midText={"City"}
+          lowerText={"Comfort"}
           isOpen={openPanel === "four"}
           onToggleOpen={() => toggleOpen("four")}
         />
         <WelcomePanel
           panelNum={"five"}
-          upperText={"Life"}
-          midText={"In"}
-          lowerText={"Motion"}
+          upperText={"Create"}
+          midText={"Better"}
+          lowerText={"Life"}
           isOpen={openPanel === "five"}
           onToggleOpen={() => toggleOpen("five")}
         />

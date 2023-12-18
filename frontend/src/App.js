@@ -3,33 +3,38 @@ import {
   createRoutesFromElements,
   Route,
   Navigate,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
+import { useEffect } from "react";
 
 // hooks
 import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages
 import Home from "./pages/Home";
+import TeamPage from "./pages/Contact/TeamPage";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/account/Profile";
 import Complaints from "./pages/account/Complaints";
+import NotFound from "./pages/NotFound";
 
 // layouts
 import RootLayout from "./layouts/RootLayout";
 import AccountLayout from "./layouts/AccountLayout";
-import NotFound from "./pages/NotFound";
 
 
 function App () {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         {/*<Route index element={user ? <Home /> : <Navigate to="/login" />} />*/}
-        <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<AboutUs />} />
+        <Route path="contact" element={<TeamPage />} />
         <Route path="login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="register" element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path="account" element={user ? <AccountLayout /> : <Navigate to="/login" />}>
@@ -40,6 +45,16 @@ function App () {
       </Route>
     )
   )
+
+  useEffect(() => {
+    if (sessionStorage.getItem('lastRoute')) {
+      router.navigate(sessionStorage.getItem('lastRoute'));
+    }
+    window.onbeforeunload = () => {
+      sessionStorage.setItem('lastRoute', window.location.pathname);
+    }
+  }, [router]);
+
   return (
     <RouterProvider router={router} />
   );

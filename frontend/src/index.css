@@ -24,6 +24,7 @@ body {
   font-weight: 400;
   color: var(--text);
   background: #f1f1f1;
+  scroll-behavior: smooth;
 }
 
 /* --- navigation --- */
@@ -107,7 +108,7 @@ nav > div > a.active {
 
 /* --- Pages --- */
 .pages {
-  padding: 0 20px;
+  width: 100%;
 }
 
 /* --- Home page --- */
@@ -115,14 +116,16 @@ nav > div > a.active {
   width: 100%;
 }
 
-.home > .container {
+.home .container {
   max-width: 1360px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
 /* --- Welcome section --- */
-.welcome {
+.section-one {
   width: 100%;
+  background: linear-gradient(to right, rgba(137, 206, 235, 0.7), rgba(5, 42, 75, 0.9));
 }
 
 .panels {
@@ -155,23 +158,35 @@ nav > div > a.active {
 }
 
 .panel-one {
-  background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500);
+  background-image: url(./assets/city-21.jpg);
+  background-position: 17%;
+  background-repeat: no-repeat;
 }
 
 .panel-two {
-  background-image: url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500);
+  background-image: url(./assets/city-22.jpg);
+  background-position: 26%;
+  background-repeat: no-repeat;
 }
 
 .panel-three {
-  background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d);
+  background-image: url(./assets/city-23.jpg);
+  background-position: 35%;
+  background-repeat: no-repeat;
 }
 
 .panel-four {
-  background-image: url(https://source.unsplash.com/ITjiVXcwVng/1500x1500);
+
+  background-image: url(./assets/city-24.jpg);
+  background-position: 44%;
+  background-repeat: no-repeat;
 }
 
 .panel-five {
-  background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
+
+  background-image: url(./assets/city-25.jpg);
+  background-position: 53%;
+  background-repeat: no-repeat;
 }
 
 .panel > * {
@@ -232,7 +247,7 @@ nav > div > a.active {
 .complaint-details {
   position: relative;
   padding: 20px;
-  margin: 30px 30px;
+  margin: 20px 25px;
   border-radius: 4px;
   background: #ffffff;
   box-shadow: 4px 2px 8px rgba(84, 84, 84, 0.4);
@@ -269,6 +284,21 @@ nav > div > a.active {
   background: #f1f1f1;
   color: #333333;
   cursor: pointer;
+}
+
+.slick-arrow {
+  position: absolute;
+  top: 50%;
+  padding: 5px;
+
+  border-radius: 50%;
+  background: none;
+}
+
+.slick-prev {
+  content: "<";
+  position: absolute;
+  left: 5%;
 }
 
 .material-symbols-outlined {
@@ -373,11 +403,16 @@ form.login, form.register {
 
 /* --- User Account --- */
 .user-account {
-
   height: 100vh;
   padding: 20px 0;
   gap: 60px;
   transition: opacity 0.5s cubic-bezier(0.39, 0.06, 0.4, 1);
+}
+
+.user-account .container {
+  max-width: 1360px;
+  padding: 0 20px;
+  margin: 0 auto;
 }
 
 .user-nav {

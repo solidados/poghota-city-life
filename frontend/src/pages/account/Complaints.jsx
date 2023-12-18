@@ -44,7 +44,6 @@ function Complaints () {
   return (
     <>
       <div className="complaints">
-        <h3>Complaints</h3>
         {complaints && complaints.complaints && complaints.complaints.map((complaint) => (
           <ComplaintDetails key={complaint._id} complaint={complaint} />
         ))}
