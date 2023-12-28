@@ -54,7 +54,7 @@ consistent toolset for manipulating `JavaScript` dates in a browser & `Node.js`
 **[Flask_PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)**: Flask extension for interacting with MongoDB.  
 **[jwt](https://jwt.io/introduction)**: JSON Web Token library for creating and verifying tokens.  
 **[werkzeug.security](https://werkzeug.palletsprojects.com/en/3.0.x/)**: Provides password hashing and checking utilities.  
-**[dotenv](https://pypi.org/project/python-dotenv/)**: Loads environment variables from a .env file  
+**[dotenv](https://pypi.org/project/python-dotenv/)**: Loads environment variables from a `.env` file  
 
 ## Setting up and Running the Project Locally
 
