@@ -14,12 +14,12 @@ Tumo labs project for city life
 To start the project:
 
 - clone, copy ZIP or fork this repo
-- goto `backend` folder and install all dependencies:
+- goto `root` folder and install all dependencies:
 
-> `$ cd <project folder>/backend`  
-`$ npm install`  
-`$ npm run dev:serve`  
-> This must show that the server runs on localhost:4000
+> `$ cd <project folder>`  
+`$ pip install requirements.txt`  
+`$ python3 app.py`  
+> This must show that the server runs on localhost:5000
 
 - goto `frontend` folder and install all dependencies:
 
@@ -48,15 +48,13 @@ consistent toolset for manipulating `JavaScript` dates in a browser & `Node.js`
 
 ### Backend:
 
-**[mongoDB](https://www.mongodb.com/atlas/database)**: Application stores its information in this cloud Database  
-**[mongoose](https://www.npmjs.com/package/mongoose)**: Object modeling tool designed to work in an asynchronous
-environment  
-**[express](https://www.npmjs.com/package/express)**: Minimalist web framework for `Node.js`  
-**[bcrypt](https://www.npmjs.com/package/bcrypt)**: A library that helps to hash passwords  
-**[dotenv](https://www.npmjs.com/package/dotenv)**: A zero-dependency module that loads environment variables from a
-`.env` file into `process.env`  
-**[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)**: An implementation of JSON Web Tokens  
-**[validator](https://www.npmjs.com/package/validator)**: A library of string validators and sanitizers
+**[Flask](https://flask.palletsprojects.com/en/3.0.x/)**: Web framework written in Python for building the application.  
+**[MongoDB](https://www.mongodb.com/docs/)**: Application Stores Information in the following database  
+**[Flask_CORS](https://flask-cors.readthedocs.io/en/latest/)**: Cross-Origin Resource Sharing extension for handling cross-origin requests.  
+**[Flask_PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)**: Flask extension for interacting with MongoDB.  
+**[jwt](https://jwt.io/introduction)**: JSON Web Token library for creating and verifying tokens.  
+**[werkzeug.security](https://werkzeug.palletsprojects.com/en/3.0.x/)**: Provides password hashing and checking utilities.  
+**[dotenv](https://pypi.org/project/python-dotenv/)**: Loads environment variables from a .env file  
 
 ## Setting up and Running the Project Locally
 
@@ -66,6 +64,7 @@ Before you begin, ensure that you have the following software installed on your 
 
 1. Node.js (v14.x or higher)
 2. npm (Node Package Manager) or yarn
+3. Python 3.11
 
 ### Clone the Repository
 
@@ -85,6 +84,8 @@ Before you begin, ensure that you have the following software installed on your 
 1. After navigating to the project directory, install the required dependencies using npm or yarn:\
    Using npm:`npm install`\
    Using yarn:`yarn install`
+2. Install the necessary requirements from the `requirements.txt` file  
+   Using pip: `pip install requirements.txt`  
 
 ### Build the Project
 
@@ -94,7 +95,10 @@ Before you begin, ensure that you have the following software installed on your 
 
 ### Start the Development Server
 
-1. To start the development server and view the application in your browser, use the following command:\
+1. To view the application in your browser, use the following command:\
    Using npm:`npm start`\
-   Using yarn:`yarn start`\
-   This will start the development server, and the application will be accessible at `http://localhost:8080`.
+   Using yarn:`yarn start`
+2. To start the development server, use the following command:   
+   `python3 app.py`  
+   This will start the development server at `http://localhost:5000/`, and the application will be accessible at `http://localhost:3000/`.
+
