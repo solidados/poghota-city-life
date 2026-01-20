@@ -1,7 +1,7 @@
 require( 'dotenv' ).config()
 
 const express = require( 'express' )
-const mongoose = require( 'mongoose' )
+const sequelize = require( './config/database' )
 const complaintRoutes = require( './routes/complaints' )
 const userRoutes = require( './routes/user' )
 
@@ -21,12 +21,17 @@ app.use( ( req, res, next ) => {
 app.use( '/api/complaints', complaintRoutes )
 app.use( '/api/user', userRoutes )
 
-// * connect to DB via mongoose
-mongoose.connect( process.env.MONGO_URI )
+// * connect to DB via sequelize and sync models
+sequelize.authenticate()
+        .then( () => {
+          console.log( 'Database connection established successfully.' )
+          // sync all models with database (creates tables if they don't exist)
+          return sequelize.sync()
+        } )
         .then( () => {
           // listen for requests
           app.listen( process.env.PORT, () => {
-            console.log( `connected to DB and listening on port ${ process.env.PORT }` )
+            console.log( `Database synced and listening on port ${ process.env.PORT }` )
           } )
         } )
-        .catch( ( error ) => console.error( error.message ) )
+        .catch( ( error ) => console.error( 'Unable to connect to database:', error.message ) )

@@ -88,6 +88,11 @@ venv/
 .env.production.local
 .env.local
 
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

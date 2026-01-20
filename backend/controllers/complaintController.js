@@ -1,13 +1,13 @@
-const mongoose = require('mongoose')
 const Complaint = require('../models/complaintModel')
 
 // * GET all complaints
 const getAllComplaints = async (req, res) => {
-  const user_id = req.user._id
+  const user_id = req.user.id
 
-  const complaints = await Complaint
-    .find({ user_id })
-    .sort({ createdAt: -1 })
+  const complaints = await Complaint.findAll({
+    where: { user_id },
+    order: [['createdAt', 'DESC']]
+  })
 
   res.status(200).json(complaints)
 }
@@ -16,11 +16,11 @@ const getAllComplaints = async (req, res) => {
 const getComplaint = async (req, res) => {
   const { id } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!id || isNaN(id)) {
     return res.status(404).json({ error: 'No such complaint was found' })
   }
 
-  const complaint = await Complaint.findById(id)
+  const complaint = await Complaint.findByPk(id)
 
   if (!complaint) {
     return res.status(404).json({ error: 'No such complaint was found' })
@@ -49,7 +49,7 @@ const createComplaint = async (req, res) => {
 
   // * add document to DB
   try {
-    const user_id = req.user._id
+    const user_id = req.user.id
     const complaint = await Complaint.create({ title, department, location, description, user_id })
     res.status(200).json(complaint)
   }
@@ -62,15 +62,17 @@ const createComplaint = async (req, res) => {
 const deleteComplaint = async (req, res) => {
   const { id } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!id || isNaN(id)) {
     return res.status(404).json({ error: 'No such complaint was found' })
   }
 
-  const complaint = await Complaint.findOneAndDelete({ _id: id })
+  const complaint = await Complaint.findByPk(id)
 
   if (!complaint) {
     return res.status(400).json({ error: 'No such complaint was found' })
   }
+
+  await complaint.destroy()
 
   res.status(200).json(complaint)
 }
@@ -79,17 +81,17 @@ const deleteComplaint = async (req, res) => {
 const updateComplaint = async (req, res) => {
   const { id } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!id || isNaN(id)) {
     return res.status(404).json({ error: 'No such complaint was found' })
   }
 
-  const complaint = await Complaint.findOneAndUpdate({ _id: id }, {
-    ...req.body
-  })
+  const complaint = await Complaint.findByPk(id)
 
   if (!complaint) {
     return res.status(400).json({ error: 'No such complaint was found' })
   }
+
+  await complaint.update(req.body)
 
   res.status(200).json(complaint)
 }

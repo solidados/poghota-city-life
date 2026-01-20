@@ -1,32 +1,39 @@
-const mongoose = require('mongoose')
+const { DataTypes } = require('sequelize')
+const sequelize = require('../config/database')
 
-const Schema = mongoose.Schema
-
-const complaintSchema = new Schema({
+const Complaint = sequelize.define('Complaint', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   title: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   department: {
-    type: String,
-    required: true,
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   location: {
-    type: String,
-    required: true,
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   description: {
-    type: String,
-    required: true,
+    type: DataTypes.TEXT,
+    allowNull: false,
   },
   images: {
-    type: [String],
-    required: true,
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
   },
   user_id: {
-    type: String,
-    required: true,
+    type: DataTypes.INTEGER,
+    allowNull: false,
   }
-}, { timestamps: true })
+}, {
+  timestamps: true,
+})
 
-module.exports = mongoose.model('Complaint', complaintSchema)
+module.exports = Complaint
